@@ -1,7 +1,6 @@
 package MusicPlayer;
 
 import javax.swing.*;
-
 import java.awt.event.*;
 import java.awt.*;
 
@@ -30,187 +29,32 @@ public class Media extends JFrame {
 
     public Media() {
 
+    }
+
+    public void showWindow() {
         // Creating Objects
         setStandardPlayList();
         s = songs[0];
 
-        background = new JPanel();
-        top = new JPanel();
-        center = new JPanel();
-        cleft = new JPanel();
-        cright = new JPanel();
-        bottom = new JPanel();
-
-        panelList = new JPanel();
-        panelLoop = new JPanel();
-        panelPlay = new JPanel();
-        panelStop = new JPanel();
-
-        artist = new JLabel();
-        name = new JLabel();
-        labelNextSong = new JLabel();
-        labelPlayList = new JLabel();
-
-        artist.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-        name.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-        labelNextSong.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-        labelPlayList.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-
+        setPanels();
+        setFonts();
         updateLabel(songs[0], songs[1]);
+        setImageIcons();
+        setJButtons();
+        setLayouts();
 
-        prevIm = new ImageIcon(
-                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\prevIm.png");
-        nextIm = new ImageIcon(
-                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\nextImg.png");
-
-        prev = new JButton();
-        next = new JButton();
-
-        start = new JButton();
-        stop = new JButton();
-        playList = new JButton();
-        loop = new JButton();
-
-        startIm = new ImageIcon(
-                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\playImage.png");
-        stopIm = new ImageIcon(
-                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\stopImage.png");
-        playListIm = new ImageIcon(
-                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\listIM.png");
-        loopIm = new ImageIcon("C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\loop.png");
-        pauseIm = new ImageIcon(
-                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\pauseImage.png");
-        // Laoyuts
-        background.setLayout(new GridLayout(3, 1));
-        top.setLayout(new GridLayout(4, 1));
-        center.setLayout(new GridLayout(1, 3));
-        cleft.setLayout(new FlowLayout());
-        cright.setLayout(new FlowLayout());
-        panelList.setLayout(new FlowLayout());
-        panelPlay.setLayout(new FlowLayout());
-        panelStop.setLayout(new FlowLayout());
-        panelLoop.setLayout(new FlowLayout());
-        bottom.setLayout(new GridLayout(1, 4));
-
-        background.setBackground(Color.white);
-        top.setBackground(Color.white);
-        center.setBackground(Color.white);
-        cleft.setBackground(Color.white);
-        cright.setBackground(Color.white);
-        bottom.setBackground(Color.white);
-
-        // Top Label
-
-        artist.setHorizontalAlignment(JLabel.CENTER);
-        name.setHorizontalAlignment(JLabel.CENTER);
-        labelPlayList.setHorizontalAlignment(JLabel.CENTER);
-        labelNextSong.setHorizontalAlignment(JLabel.CENTER);
-
-        // Center
-
-        prev.setBounds(0, 0, 100, 100);
-        prev.setIcon(new ImageIcon(
-                prevIm.getImage().getScaledInstance(prev.getWidth(), prev.getHeight(), Image.SCALE_SMOOTH)));
-        next.setBounds(0, 0, 100, 100);
-        next.setIcon(new ImageIcon(
-                nextIm.getImage().getScaledInstance(next.getWidth(), next.getHeight(), Image.SCALE_SMOOTH)));
-
-        prev.setBackground(Color.WHITE);
-        next.setBackground(Color.WHITE);
-        image = new JLabel(new ImageIcon(
-                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\musicImage.png"));
-        prev.setBorder(null);
-        next.setBorder(null);
-
-        playList.setBounds(0, 0, 100, 100);
-        playList.setIcon(new ImageIcon(playListIm.getImage().getScaledInstance(playList.getWidth(),
-                playList.getHeight(), Image.SCALE_SMOOTH)));
-        start.setBounds(0, 0, 100, 100);
-        start.setIcon(new ImageIcon(
-                startIm.getImage().getScaledInstance(start.getWidth(), start.getHeight(), Image.SCALE_SMOOTH)));
-        stop.setBounds(0, 0, 100, 100);
-        stop.setIcon(new ImageIcon(
-                stopIm.getImage().getScaledInstance(stop.getWidth(), stop.getHeight(), Image.SCALE_SMOOTH)));
-        loop.setBounds(0, 0, 100, 100);
-        loop.setIcon(new ImageIcon(
-                loopIm.getImage().getScaledInstance(loop.getWidth(), loop.getHeight(), Image.SCALE_SMOOTH)));
-
-        start.setBackground(Color.WHITE);
-        loop.setBackground(Color.WHITE);
-        stop.setBackground(Color.WHITE);
-        playList.setBackground(Color.WHITE);
-        start.setBorder(null);
-        loop.setBorder(null);
-        stop.setBorder(null);
-        playList.setBorder(null);
-
-        panelPlay.setBackground(Color.white);
-        panelList.setBackground(Color.white);
-        panelLoop.setBackground(Color.white);
-        panelStop.setBackground(Color.white);
-        bottom.setBorder(BorderFactory.createRaisedBevelBorder());
-        bottom.setBorder(BorderFactory.createMatteBorder(0, 9, 9, 9, Color.GRAY));
-        center.setBorder(BorderFactory.createMatteBorder(0, 9, 0, 9, Color.GRAY));
-        top.setBorder(BorderFactory.createMatteBorder(9, 9, 0, 9, Color.GRAY));
+        setTop();
+        setCenter();
+        add();
 
         UIManager.put("Button.select", Color.gray);
 
-        top.add(name);
-        top.add(artist);
-        top.add(labelPlayList);
-        top.add(labelNextSong);
-
-        cleft.add(prev);
-        cright.add(next);
-        center.add(cleft);
-        center.add(image);
-        center.add(cright);
-
-        panelList.add(playList);
-        panelPlay.add(start);
-        panelStop.add(stop);
-        panelLoop.add(loop);
-
-        bottom.add(panelList);
-        bottom.add(panelPlay);
-        bottom.add(panelStop);
-        bottom.add(panelLoop);
-
-        background.add(top);
-        background.add(center);
-        background.add(bottom);
-
-        add(background);
-        addWindowListener(new WinC());
-        start.addActionListener(new reproduceSong());
-        stop.addActionListener(new stopSong());
-        loop.addActionListener(new loopPlayList());
-        prev.addActionListener(new previousSong());
-        next.addActionListener(new nextSong());
-        playList.addActionListener(new openPlayList());
-        setSize(750, 580);
-        setMinimumSize(new Dimension(700, 580));
-        setTitle("Focil Music Player");
-        setVisible(true);
-        setLocationRelativeTo(null);
-        setResizable(true);
-
-    }
-
-    private class WinC extends WindowAdapter {
-        public void windowClosing(WindowEvent e) {
-            if (reproducing) {
-                stop();
-            }
-            setVisible(false);
-            dispose();
-            JOptionPane.showMessageDialog(null, "Thanks for using this Music Media Player", "Exiting the program...",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-
+        addActionListeners();
+        setWindow();
     }
 
     private class previousSong implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             s.stop();
             start.setIcon(new ImageIcon(
@@ -234,6 +78,7 @@ public class Media extends JFrame {
     }
 
     private class nextSong implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             s.stop();
 
@@ -268,18 +113,21 @@ public class Media extends JFrame {
     }
 
     private class reproduceSong implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             play();
         }
     }
 
     private class stopSong implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             stop();
         }
     }
 
     private class openPlayList implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             Integer option;
 
@@ -314,6 +162,7 @@ public class Media extends JFrame {
     }
 
     private class loopPlayList implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             if (looping) {
                 loop.setBackground(Color.white);
@@ -354,9 +203,7 @@ public class Media extends JFrame {
             songs[11] = (new Song("Si me tenias", "Manuel Mijares",
                     "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Songs\\SiMeTenias.wav"));
 
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
         }
 
     }
@@ -411,6 +258,235 @@ public class Media extends JFrame {
         s.stop();
         start.setIcon(new ImageIcon(
                 startIm.getImage().getScaledInstance(start.getWidth(), start.getHeight(), Image.SCALE_SMOOTH)));
+    }
+
+    // GUI CONFIGURATION
+
+    private void setPanels() {
+        background = new JPanel();
+        top = new JPanel();
+        center = new JPanel();
+        cleft = new JPanel();
+        cright = new JPanel();
+        bottom = new JPanel();
+
+        panelList = new JPanel();
+        panelLoop = new JPanel();
+        panelPlay = new JPanel();
+        panelStop = new JPanel();
+
+        artist = new JLabel();
+        name = new JLabel();
+        labelNextSong = new JLabel();
+        labelPlayList = new JLabel();
+    }
+
+    private void setFonts() {
+        artist.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+        name.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+        labelNextSong.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+        labelPlayList.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+    }
+
+    private void setImageIcons() {
+        prevIm = new ImageIcon(
+                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\prevIm.png");
+        nextIm = new ImageIcon(
+                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\nextImg.png");
+        startIm = new ImageIcon(
+                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\playImage.png");
+        stopIm = new ImageIcon(
+                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\stopImage.png");
+        playListIm = new ImageIcon(
+                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\listIM.png");
+        loopIm = new ImageIcon("C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\loop.png");
+        pauseIm = new ImageIcon(
+                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\pauseImage.png");
+
+    }
+
+    private void setJButtons() {
+        prev = new JButton();
+        next = new JButton();
+
+        start = new JButton();
+        stop = new JButton();
+        playList = new JButton();
+        loop = new JButton();
+    }
+
+    private void setLayouts() {
+        // Laoyuts
+        background.setLayout(new GridLayout(3, 1));
+        top.setLayout(new GridLayout(4, 1));
+        center.setLayout(new GridLayout(1, 3));
+        cleft.setLayout(new FlowLayout());
+        cright.setLayout(new FlowLayout());
+        panelList.setLayout(new FlowLayout());
+        panelPlay.setLayout(new FlowLayout());
+        panelStop.setLayout(new FlowLayout());
+        panelLoop.setLayout(new FlowLayout());
+        bottom.setLayout(new GridLayout(1, 4));
+
+        background.setBackground(Color.white);
+        top.setBackground(Color.white);
+        center.setBackground(Color.white);
+        cleft.setBackground(Color.white);
+        cright.setBackground(Color.white);
+        bottom.setBackground(Color.white);
+    }
+
+    private void setBounds() {
+        prev.setBounds(0, 0, 100, 100);
+        next.setBounds(0, 0, 100, 100);
+        playList.setBounds(0, 0, 100, 100);
+        start.setBounds(0, 0, 100, 100);
+        stop.setBounds(0, 0, 100, 100);
+        loop.setBounds(0, 0, 100, 100);
+    }
+
+    private void setIcons() {
+        prev.setIcon(new ImageIcon(
+                prevIm.getImage().getScaledInstance(prev.getWidth(), prev.getHeight(), Image.SCALE_SMOOTH)));
+
+        next.setIcon(new ImageIcon(
+                nextIm.getImage().getScaledInstance(next.getWidth(), next.getHeight(), Image.SCALE_SMOOTH)));
+
+        playList.setIcon(new ImageIcon(playListIm.getImage().getScaledInstance(playList.getWidth(),
+                playList.getHeight(), Image.SCALE_SMOOTH)));
+
+        start.setIcon(new ImageIcon(
+                startIm.getImage().getScaledInstance(start.getWidth(), start.getHeight(), Image.SCALE_SMOOTH)));
+
+        stop.setIcon(new ImageIcon(
+                stopIm.getImage().getScaledInstance(stop.getWidth(), stop.getHeight(), Image.SCALE_SMOOTH)));
+
+        loop.setIcon(new ImageIcon(
+                loopIm.getImage().getScaledInstance(loop.getWidth(), loop.getHeight(), Image.SCALE_SMOOTH)));
+        image = new JLabel(new ImageIcon(
+                "C:\\Users\\SAPUEBLA\\Documents\\Programacion\\Projects\\MusicPlayer\\Images\\musicImage.png"));
+
+    }
+
+    private void setBackgrounds() {
+        prev.setBackground(Color.WHITE);
+        next.setBackground(Color.WHITE);
+        start.setBackground(Color.WHITE);
+        loop.setBackground(Color.WHITE);
+        stop.setBackground(Color.WHITE);
+        playList.setBackground(Color.WHITE);
+        panelPlay.setBackground(Color.white);
+        panelList.setBackground(Color.white);
+        panelLoop.setBackground(Color.white);
+        panelStop.setBackground(Color.white);
+
+    }
+
+    private void setTop() {
+        // Top Label
+        artist.setHorizontalAlignment(JLabel.CENTER);
+        name.setHorizontalAlignment(JLabel.CENTER);
+        labelPlayList.setHorizontalAlignment(JLabel.CENTER);
+        labelNextSong.setHorizontalAlignment(JLabel.CENTER);
+    }
+
+    private void setCenter() {
+        setBounds();
+        setIcons();
+        setBackgrounds();
+        setBorders();
+
+    }
+
+    private void setBorders() {
+        prev.setBorder(null);
+        next.setBorder(null);
+        start.setBorder(null);
+        loop.setBorder(null);
+        stop.setBorder(null);
+        playList.setBorder(null);
+        bottom.setBorder(BorderFactory.createRaisedBevelBorder());
+        bottom.setBorder(BorderFactory.createMatteBorder(0, 9, 9, 9, Color.GRAY));
+        center.setBorder(BorderFactory.createMatteBorder(0, 9, 0, 9, Color.GRAY));
+        top.setBorder(BorderFactory.createMatteBorder(9, 9, 0, 9, Color.GRAY));
+
+    }
+
+    private void add() {
+        addTop();
+        addCenter();
+        addPanel();
+        addBottom();
+        addBackground();
+    }
+
+    private void addTop() {
+        top.add(name);
+        top.add(artist);
+        top.add(labelPlayList);
+        top.add(labelNextSong);
+    }
+
+    private void addCenter() {
+        cleft.add(prev);
+        cright.add(next);
+        center.add(cleft);
+        center.add(image);
+        center.add(cright);
+    }
+
+    private void addBottom() {
+        bottom.add(panelList);
+        bottom.add(panelPlay);
+        bottom.add(panelStop);
+        bottom.add(panelLoop);
+    }
+
+    private void addBackground() {
+        background.add(top);
+        background.add(center);
+        background.add(bottom);
+        add(background);
+    }
+
+    private void addActionListeners() {
+        addWindowListener(new WinC());
+        start.addActionListener(new reproduceSong());
+        stop.addActionListener(new stopSong());
+        loop.addActionListener(new loopPlayList());
+        prev.addActionListener(new previousSong());
+        next.addActionListener(new nextSong());
+        playList.addActionListener(new openPlayList());
+    }
+
+    private void addPanel() {
+        panelList.add(playList);
+        panelPlay.add(start);
+        panelStop.add(stop);
+        panelLoop.add(loop);
+    }
+
+    private void setWindow() {
+        setSize(750, 580);
+        setMinimumSize(new Dimension(700, 580));
+        setTitle("Focil Music Player");
+        setVisible(true);
+        setLocationRelativeTo(null);
+        setResizable(true);
+    }
+
+    private class WinC extends WindowAdapter {
+
+        public void windowClosing(WindowEvent e) {
+            if (reproducing) {
+                stop();
+            }
+            setVisible(false);
+            dispose();
+            JOptionPane.showMessageDialog(null, "Thanks for using this Music Media Player", "Exiting the program...",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 
 }
